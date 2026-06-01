@@ -42,14 +42,14 @@
 
 ##### Failure States & Recovery:
 1. Game Over Conditions:
-   - Player health reaches 0
-   - Wave progression fails
-   - Network errors in score submission
+   - Player health reaches 0%
+   - Wave progression fails due to network errors
+   - Network errors in score submission after 3 retries
 
 2. Error Handling:
-   - Safe state reset on errors
-   - Graceful degradation of game elements
-   - Clear user feedback for critical failures
+   - Safe state reset on errors (timeout:5s)
+   - Graceful degradation of game elements with fallback states
+   - Clear user feedback for critical failures via overlay messages (max duration:10s)
 
 #### 2. Architecture & Data Flow Diagram
 
