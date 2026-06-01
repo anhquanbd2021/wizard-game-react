@@ -55,22 +55,39 @@
 
 ```mermaid
 graph TD
-    A[GameCanvas] --> B[useGameController]
-    B --> C[GameState Management]
-    C --> D{Wave Progression}
-    D --> E[Score Tracking]
-    D --> F[Enemy Spawning]
-    C --> G[Pause Handling]
-    B --> H[Audio System]
-    H --> I{Sound Effects}
-    I --> J(Music)
-    I --> K(Notifications)
-    B --> L[Visual Elements]
-    L --> M(Canvas Rendering)
-    L --> N(Overlay UI)
-    B --> O[Leaderboard Integration]
-    O --> P(Score Submission)
-    O --> Q{High Score Display}
+    A[useGameController] --> B[GameState Management]
+    A --> C[Asset Loading]
+    A --> D[Audio System]
+    A --> E[Screen State Management]
+    A --> F[Leaderboard Integration]
+
+    B --> G{Wave Progression}
+    B --> H{Player Stats}
+    B --> I{Score Tracking}
+
+    D --> J{Sound Effects}
+    D --> K{Music Playback}
+    D --> L{Volume Control}
+
+    E --> M{Screen Transitions}
+    E --> N{Overlay UI}
+    E --> O{Modal Dialogs}
+
+    F --> P[Secure Score Submission]
+    F --> Q{High Scores Display}
+    F --> R{Recent Game History}
+
+    G --> S[Enemy Spawning]
+    G --> T[Wave Messages]
+    G --> U[Progress Indicators]
+
+    H --> V{Health Management}
+    H --> W{Currency System}
+    H --> X{Upgrade Store}
+
+    I --> Y{Score Calculation}
+    I --> Z{Time Tracking}
+    I --> AA{Game Duration}
 ```
 
 #### 3. Functional Test Specification Matrix
