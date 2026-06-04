@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-"local-ai:discover": "cross-env OLLAMA_API_BASE=http://192.168.10.17:11434 npx discover-legacy",
-    "local-ai": "cross-env PATH=\"C:\\Users\\BA TIM\\AppData\\Local\\Programs\\Python\\Python311\\Scripts;%PATH%\" OLLAMA_API_BASE=http://192.168.10.17:11434 npx --yes cmdctrl-aider",
-    "local-ai:check": "cross-env PATH=\"C:\\Users\\BA TIM\\AppData\\Local\\Programs\\Python\\Python311\\Scripts;%PATH%\" OLLAMA_API_BASE=http://192.168.10.17:11434 npx --yes cmdctrl-aider --chat-mode ask"
+    "pulllastedlocal-ai": "npm install -D github:anhquanbd2021/local-ai-discoverer",
+    "local-ai:discover": "cross-env OLLAMA_API_BASE=http://192.168.1.23:11434 npm exec discover-legacy",
+    "local-ai:discover:watch": "cross-env OLLAMA_API_BASE=http://192.168.1.23:11434 npm exec discover-legacy -- --watch"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.49.8",
