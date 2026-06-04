@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "pulllastedlocal-ai": "npm install -D github:anhquanbd2021/local-ai-discoverer",
-    "local-ai:discover": "cross-env OLLAMA_API_BASE=http://192.168.1.23:11434 npm exec discover-legacy",
+    "local-ai:discover": "npm run pulllastedlocal-ai && cross-env OLLAMA_API_BASE=http://192.168.1.23:11434 npm exec discover-legacy",
     "local-ai:discover:watch": "cross-env OLLAMA_API_BASE=http://192.168.1.23:11434 npm exec discover-legacy -- --watch"
   },
   "dependencies": {
