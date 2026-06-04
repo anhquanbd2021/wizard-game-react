@@ -1,5 +1,11 @@
-import { getTopScores, getAllScores, getTotalGamesPlayed, recordGameStarted } from "./leaderboard";
-import { supabase } from "@/lib/supabase";
+import { describe, it, expect } from "vitest";
+import {
+  getTopScores,
+  getAllScores,
+  recordGameStarted,
+  getTotalGamesPlayed,
+  getScoreRank,
+} from "./leaderboard";
 
 vi.mock("@/lib/supabase", () => ({
   supabase: {
@@ -13,8 +19,8 @@ vi.mock("@/lib/supabase", () => ({
   },
 }));
 
-describe("leaderboard utilities", () => {
-  it("fetches top scores", async () => {
+describe("Leaderboard Utilities", () => {
+  it("fetches top scores correctly", async () => {
     (supabase.from as any).mockReturnValue({
       select: vi.fn().mockResolvedValue({ data: [{ id: "1", player_name: "Player1", score: 500, waves_survived: 3, created_at: new Date().toISOString() }] }),
     });
@@ -23,7 +29,7 @@ describe("leaderboard utilities", () => {
     expect(topScores).toHaveLength(1);
   });
 
-  it("fetches all scores", async () => {
+  it("fetches all scores correctly", async () => {
     (supabase.from as any).mockReturnValue({
       select: vi.fn().mockResolvedValue({ data: [{ id: "1", player_name: "Player1", score: 500, waves_survived: 3, created_at: new Date().toISOString() }] }),
     });
@@ -32,16 +38,7 @@ describe("leaderboard utilities", () => {
     expect(allScores).toHaveLength(1);
   });
 
-  it("gets total games played", async () => {
-    (supabase.from as any).mockReturnValue({
-      select: vi.fn().mockResolvedValue({ data: [{ total_games_played: 10 }] }),
-    });
-
-    const totalGamesPlayed = await getTotalGamesPlayed();
-    expect(totalGamesPlayed).toBe(10);
-  });
-
-  it("records game started", async () => {
+  it("records game started correctly", async () => {
     (supabase.from as any).mockReturnValue({
       select: vi.fn().mockResolvedValue({ data: [{ total_games_played: 10 }] }),
       update: vi.fn().mockResolvedValue({ error: null }),
@@ -50,7 +47,22 @@ describe("leaderboard utilities", () => {
     const success = await recordGameStarted();
     expect(success).toBe(true);
   });
-});
-```
 
-These test files should cover the main functionalities of the provided components and hooks. Run these tests using Vitest to ensure full coverage. If there are any uncovered lines, you can add more specific assertions or edge cases as needed.
+  it("fetches total games played correctly", async () => {
+    (supabase.from as any).mockReturnValue({
+      select: vi.fn().mockResolvedValue({ data: [{ total_games_played: 10 }] }),
+    });
+
+    const totalGamesPlayed = await getTotalGamesPlayed();
+    expect(totalGamesPlayed).toBe(10);
+  });
+
+  it("gets score rank correctly", async () => {
+    (supabase.from as any).mockReturnValue({
+      select: vi.fn().mockResolvedValue({ count: 2 }),
+    });
+
+    const rank = await getScoreRank(400);
+    expect(rank).toBe(3);
+  });
+});
